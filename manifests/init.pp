@@ -23,7 +23,6 @@ class logstash (
   # validate parameters here
   
   class { '::logstash::install': } ->
-  class { '::logstash::config': } ~>
   class { '::logstash::service': } ->
   Class['::logstash']
 }

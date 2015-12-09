@@ -17,10 +17,10 @@ class logstash::install {
   } ->
   
   staging::extract  { "logstash-${::logstash::version}.tar.gz":
-    target => "${::logstash::install_dir}/logstash",
+    target  => "${::logstash::install_dir}/logstash",
     creates => "${::logstash::install_dir}/logstash/logstash-${::logstash::version}/NOTICE.TXT",
     require => Staging::File["logstash-${::logstash::version}.tar.gz"],
-  } 
+  }
 
   file { '/etc/logstash' :
     ensure  => directory,

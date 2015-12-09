@@ -6,12 +6,12 @@
 class logstash::service {
 
   file { '/etc/init.d/logstash' :
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0775',
-    content => template('logstash/logstash_init.erb'),
-  } 
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0775',
+    source => 'puppet:///modules/logstash/logstash_init',
+  }
 
   service { 'logstash':
     ensure     => running,

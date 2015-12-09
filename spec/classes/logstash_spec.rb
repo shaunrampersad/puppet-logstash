@@ -11,16 +11,14 @@ describe 'logstash' do
         context "logstash class without any parameters" do
           let(:params) {{ }}
 
-          it { is_expected.to compile.with_all_deps }
+          it { should compile.with_all_deps }
 
-          it { is_expected.to contain_class('logstash') }
-          it { is_expected.to contain_class('logstash::params') }
-#          it { is_expected.to contain_class('logstash::install').that_comes_before('logstash::config') }
-#          it { is_expected.to contain_class('logstash::config') }
-#          it { is_expected.to contain_class('logstash::service').that_subscribes_to('logstash::config') }
+          it { should contain_class('logstash') }
+          it { should contain_class('logstash::params') }
+          it { should contain_class('logstash::install').that_comes_before('logstash::service') }
+          it { should contain_class('logstash::service') }
 
-#          it { is_expected.to contain_service('logstash') }
-#          it { is_expected.to contain_package('logstash').with_ensure('present') }
+          it { should contain_service('logstash') }
 
           it do
             should contain_class('staging').with({
@@ -37,21 +35,21 @@ describe 'logstash' do
             })
           end
 
-          it { is_expected.to contain_file('/etc/logstash').with({
+          it { should contain_file('/etc/logstash').with({
             'ensure' => 'directory',
             'owner' => 'logstash',
             'group' => 'logstash',
             'mode' => '0640',
           })}
 
-          it { is_expected.to contain_file('/etc/logstash/conf.d').with({
+          it { should contain_file('/etc/logstash/conf.d').with({
             'ensure' => 'directory',
             'owner' => 'logstash',
             'group' => 'logstash',
             'mode' => '0640',
           })}
 
-          it { is_expected.to contain_file('/etc/init.d/logstash').with({
+          it { should contain_file('/etc/init.d/logstash').with({
             'ensure' => 'present',
             'owner' => 'root',
             'group' => 'root',
@@ -59,7 +57,7 @@ describe 'logstash' do
           })}
 
 
-          it { is_expected.to contain_file('/opt/logstash/latest').with({
+          it { should contain_file('/opt/logstash/latest').with({
             'ensure' => 'link',
             'owner' => 'logstash',
             'group' => 'logstash',
@@ -79,7 +77,7 @@ describe 'logstash' do
 #        }
 #      end
 
-#      it { expect { is_expected.to contain_package('logstash') }.to raise_error(Puppet::Error, /Nexenta not supported/) }
+#      it { expect { should contain_service('logstash') }.to raise_error(Puppet::Error, /Nexenta not supported/) }
 #    end
 #  end
 end
