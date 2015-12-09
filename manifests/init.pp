@@ -11,14 +11,17 @@
 #   e.g. "Specify one or more upstream ntp servers as an array."
 #
 class logstash (
-  $package_name = $::logstash::params::package_name,
-  $service_name = $::logstash::params::service_name,
+  $version = $::logstash::version,
+  $install_dir = $::logstash::version,
+  $user = $::logstash::user,
+  $group = $::logstash::group,
+
 ) inherits ::logstash::params {
 
   # validate parameters here
-
+  
   class { '::logstash::install': } ->
-  class { '::logstash::config': } ~>
-  class { '::logstash::service': } ->
+  #  class { '::logstash::config': } ~>
+  #class { '::logstash::service': } ->
   Class['::logstash']
 }

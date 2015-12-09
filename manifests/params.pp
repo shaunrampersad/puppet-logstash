@@ -5,8 +5,11 @@
 #
 class logstash::params {
 
-  $package_version => '2.0.0'
-  $install_dir => '/opt'
+  $version = '2.0.0'
+  $install_dir = '/opt'
+  $user = 'logstash'
+  $group = 'logstash'
+
 }
 
 #  case $::osfamily {
