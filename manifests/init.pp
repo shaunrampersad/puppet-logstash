@@ -12,9 +12,11 @@
 #
 class logstash (
   $version = $::logstash::version,
-  $install_dir = $::logstash::version,
+  $install_dir = $::logstash::install_dir,
   $user = $::logstash::user,
   $group = $::logstash::group,
+  $download_url = $::logstash::download_url
+
 
 ) inherits ::logstash::params {
 

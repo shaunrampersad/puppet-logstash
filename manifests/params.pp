@@ -9,6 +9,7 @@ class logstash::params {
   $install_dir = '/opt'
   $user = 'logstash'
   $group = 'logstash'
+  $download_url = 'https://download.elastic.co/logstash/logstash'
 
 }
 
