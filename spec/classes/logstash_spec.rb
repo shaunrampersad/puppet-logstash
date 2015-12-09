@@ -37,6 +37,34 @@ describe 'logstash' do
             })
           end
 
+          it { is_expected.to contain_file('/etc/logstash').with({
+            'ensure' => 'directory',
+            'owner' => 'logstash',
+            'group' => 'logstash',
+            'mode' => '0640',
+          })}
+
+          it { is_expected.to contain_file('/etc/logstash/conf.d').with({
+            'ensure' => 'directory',
+            'owner' => 'logstash',
+            'group' => 'logstash',
+            'mode' => '0640',
+          })}
+
+          it { is_expected.to contain_file('/etc/init.d/logstash').with({
+            'ensure' => 'present',
+            'owner' => 'root',
+            'group' => 'root',
+            'mode' => '0775',
+          })}
+
+
+          it { is_expected.to contain_file('/opt/logstash/latest').with({
+            'ensure' => 'link',
+            'owner' => 'logstash',
+            'group' => 'logstash',
+            'target' => '/opt/logstash/logstash-2.0.0',
+          })}
 
         end
       end

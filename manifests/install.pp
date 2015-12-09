@@ -40,18 +40,12 @@ class logstash::install {
 
   file { "${::logstash::install_dir}/logstash/latest" :
     ensure  => link,
+    owner   => $::logstash::user,
+    group   => $::logstash::group,
     target  => "${::logstash::install_dir}/logstash/logstash-${::logstash::version}",
     require => Staging::Extract["logstash-${::logstash::version}.tar.gz"],
   }
 
-  file { '/etc/init.d/logstash' :
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('logstash/logstash_init.erb'),
-    require => Staging::Extract["logstash-${::logstash::version}.tar.gz"],
-  }
 
 
 

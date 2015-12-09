@@ -5,7 +5,15 @@
 #
 class logstash::service {
 
-  service { $::logstash::service_name:
+  file { '/etc/init.d/logstash' :
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0775',
+    content => template('logstash/logstash_init.erb'),
+  } 
+
+  service { 'logstash':
     ensure     => running,
     enable     => true,
     hasstatus  => true,
