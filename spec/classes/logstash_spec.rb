@@ -18,6 +18,17 @@ describe 'logstash' do
 
           it { is_expected.to contain_service('logstash') }
           it { is_expected.to contain_package('logstash').with_ensure('present') }
+
+          it do
+            should contain_class('staging').with({
+              'path'  => '/opt/logstash/.staging',
+              'mode'  => '0700',
+              'owner' => 'logstash',
+              'group' => 'logstash',
+            })
+          end
+
+
         end
       end
     end
