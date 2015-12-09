@@ -22,17 +22,37 @@ class logstash::install {
     require => Staging::File["logstash-${::logstash::version}.tar.gz"],
   } 
 
-  file { "${::logstash::install_dir}/logstash/logstash-${::logstash::version}/config" :
+  file { '/etc/logstash' :
     ensure  => directory,
-    owner   => "$::logstash::user",
-    group   => "$::logstash::group",
-    mode    => "0640",
+    owner   => $::logstash::user,
+    group   => $::logstash::group,
+    mode    => '0640',
+    require => Staging::Extract["logstash-${::logstash::version}.tar.gz"],
+  }
+
+  file { '/etc/logstash/conf.d' :
+    ensure  => directory,
+    owner   => $::logstash::user,
+    group   => $::logstash::group,
+    mode    => '0640',
+    require => File['/etc/logstash'],
   }
 
   file { "${::logstash::install_dir}/logstash/latest" :
     ensure  => link,
-    target   => "${::logstash::install_dir}/logstash/logstash-${::logstash::version}",
+    target  => "${::logstash::install_dir}/logstash/logstash-${::logstash::version}",
+    require => Staging::Extract["logstash-${::logstash::version}.tar.gz"],
   }
+
+  file { '/etc/init.d/logstash' :
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('logstash/logstash_init.erb'),
+    require => Staging::Extract["logstash-${::logstash::version}.tar.gz"],
+  }
+
 
 
 }
