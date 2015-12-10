@@ -13,8 +13,7 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves. This is your 30 second elevator pitch for your module. Consider including OS/Puppet version it works with.       
-
+Install Logstash by downloading the tar file from elastc. The tar file contains all the plugins that do not come with the rpm install. This would allow installation of logstash 2.x 
 ## Module Description
 
 If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
