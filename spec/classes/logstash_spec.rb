@@ -47,6 +47,15 @@ describe 'logstash' do
           end
 
           it do
+            should contain_staging__extract('logstash-2.0.0.tar.gz')
+              .with({
+                'target' => '/opt/logstash',
+                'creates' => '/opt/logstash/logstash-2.0.0/NOTICE.TXT',
+              })
+              .that_requires('Staging::File[logstash-2.0.0.tar.gz]')
+          end
+
+          it do
             should contain_file('/etc/logstash')
               .with({
                 'ensure' => 'directory',
