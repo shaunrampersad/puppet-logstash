@@ -13,17 +13,3 @@ class logstash::params {
 
 }
 
-#  case $::osfamily {
-#    'Debian': {
-#      $package_name = 'logstash'
-#      $service_name = 'logstash'
-#    }
-#    'RedHat', 'Amazon': {
-#      $package_name = 'logstash'
-#      $service_name = 'logstash'
-#    }
-#    default: {
-#      fail("${::operatingsystem} not supported")
-#    }
-#  }
-#}

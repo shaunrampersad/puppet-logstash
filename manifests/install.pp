@@ -4,12 +4,16 @@
 #
 class logstash::install {
 
+  file { "${::logstash::install_dir}/logstash" :
+    ensure => directory,
+    owner  => $::logstash::user,
+    group  => $::logstash::group,
+    mode   => '0750',
+  } ->
 
   class { '::staging':
-    path  => "${::logstash::install_dir}/logstash/.staging",
-    mode  => '0700',
-    owner => $::logstash::user,
-    group => $::logstash::group,
+    path => "${::logstash::install_dir}/logstash/.staging",
+    mode => '0700',
   }
 
   staging::file { "logstash-${::logstash::version}.tar.gz":
@@ -20,21 +24,20 @@ class logstash::install {
     target  => "${::logstash::install_dir}/logstash",
     creates => "${::logstash::install_dir}/logstash/logstash-${::logstash::version}/NOTICE.TXT",
     require => Staging::File["logstash-${::logstash::version}.tar.gz"],
-  }
+  } ->
 
   file { '/etc/logstash' :
-    ensure  => directory,
-    owner   => $::logstash::user,
-    group   => $::logstash::group,
-    mode    => '0640',
-    require => Staging::Extract["logstash-${::logstash::version}.tar.gz"],
+    ensure => directory,
+    owner  => $::logstash::user,
+    group  => $::logstash::group,
+    mode   => '0750',
   }
 
   file { '/etc/logstash/conf.d' :
     ensure  => directory,
     owner   => $::logstash::user,
     group   => $::logstash::group,
-    mode    => '0640',
+    mode    => '0750',
     require => File['/etc/logstash'],
   }
 
@@ -45,8 +48,4 @@ class logstash::install {
     target  => "${::logstash::install_dir}/logstash/logstash-${::logstash::version}",
     require => Staging::Extract["logstash-${::logstash::version}.tar.gz"],
   }
-
-
-
-
 }

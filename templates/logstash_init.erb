@@ -15,7 +15,7 @@
 # Description:        Starts Logstash as a daemon.
 ### END INIT INFO
 
-PATH=/sbin:/usr/sbin:/bin:/usr/bin:/opt/logstash/latest/bin
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:<%= scope['logstash::install_dir'] %>/logstash/latest/bin
 export PATH
 
 if [ `id -u` -ne 0 ]; then
@@ -28,7 +28,7 @@ pidfile="/var/run/$name.pid"
 
 LS_USER=logstash
 LS_GROUP=logstash
-LS_HOME=/opt/logstash/latest
+LS_HOME=<%= scope['logstash::install_dir'] %>/logstash/latest
 LS_HEAP_SIZE="500m"
 LS_LOG_DIR=/var/log/logstash
 LS_LOG_FILE="${LS_LOG_DIR}/$name.log"
@@ -41,7 +41,7 @@ LS_OPTS=""
 [ -r /etc/default/$name ] && . /etc/default/$name
 [ -r /etc/sysconfig/$name ] && . /etc/sysconfig/$name
 
-program=/opt/logstash/bin/logstash
+program=<%= scope['logstash::install_dir'] %>/logstash/bin/logstash
 args="agent -f ${LS_CONF_DIR} -l ${LS_LOG_FILE} ${LS_OPTS}"
 
 start() {
