@@ -11,11 +11,6 @@ class logstash::install {
     mode   => '0750',
   } ->
 
-  class { '::staging':
-    path => "${::logstash::install_dir}/logstash/.staging",
-    mode => '0700',
-  }
-
   staging::file { "logstash-${::logstash::version}.tar.gz":
     source => "${::logstash::download_url}/logstash-${::logstash::version}.tar.gz",
   } ->
