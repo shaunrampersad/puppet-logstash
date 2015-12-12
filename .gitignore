@@ -8,6 +8,7 @@
 /Gemfile.lock
 /junit
 /log
+/.vagrant
 .yardoc
 coverage
 rspec.xml

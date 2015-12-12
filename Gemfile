@@ -31,5 +31,6 @@ group :system_tests do
   gem "beaker"
   gem "beaker-rspec"
   gem "beaker-puppet_install_helper"
-  gem "vagrant-wrapper"
+#  gem "vagrant-wrapper"
+#  gem 'bundler', '1.10.5'
 end

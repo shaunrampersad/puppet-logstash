@@ -4,12 +4,27 @@
 #
 class logstash::install {
 
+
+  group { $::logstash::group:
+     ensure => present,
+  } ->
+
+  user { $::logstash::user:
+    ensure      => present,
+    comment     => "logstash user",
+    managehome  => false,
+    system      => true,
+    groups       => $::logstash::group,
+    home        => "${::logstash::install_dir}/logstash",
+  } ->
+
   file { "${::logstash::install_dir}/logstash" :
     ensure => directory,
     owner  => $::logstash::user,
     group  => $::logstash::group,
     mode   => '0750',
   } ->
+
 
   staging::file { "logstash-${::logstash::version}.tar.gz":
     source => "${::logstash::download_url}/logstash-${::logstash::version}.tar.gz",

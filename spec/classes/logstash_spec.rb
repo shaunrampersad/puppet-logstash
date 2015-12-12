@@ -20,6 +20,13 @@ describe 'logstash' do
 
           it { should contain_service('logstash') }
 
+          it { should contain_group('logstash') }
+
+          it do
+            should contain_user('logstash')
+              .with('system' => 'true')
+          end
+
           it do
             should contain_file('/opt/logstash')
               .with('ensure' => 'directory',
